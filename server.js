@@ -8,7 +8,7 @@ var https = require('https');
 var fs = require('fs')
 var privatekey = fs.readFileSync('cert/2_fancy-x.imwork.net.key', 'utf8');
 var certificate = fs.readFileSync('cert/1_fancy-x.imwork.net_bundle.crt', 'utf8');
-var options={key:privatekey, cert:certificate};
+var options = {key: privatekey, cert: certificate};
 
 mongoose.connect('mongodb://root:123456@127.0.0.1:27017/mind', {useNewUrlParser: true}, function (err) {
 	if (err) {
@@ -75,7 +75,7 @@ server.get('/comeon', function (req, res) {
 	let id = req.query.id
 	let count = parseInt(req.query.count)
 	if (id && count !== undefined) {
-		Msgs.updateOne({_id: id}, {$set: { comeOn: count}}, function (err, doc) {
+		Msgs.updateOne({_id: id}, {$set: {comeOn: count}}, function (err, doc) {
 			if (err) {
 				res.send({
 					status: 1,
@@ -90,7 +90,7 @@ server.get('/comeon', function (req, res) {
 				})
 			}
 		})
-	}else {
+	} else {
 		res.send({
 			status: 1,
 			data: '字段错误'
@@ -130,7 +130,8 @@ server.post('/send', function (req, res) {
 					res.send({
 						status: 0,
 						msg: '',
-						data: '发表成功'
+						data: '发表成功',
+						count: doc1.length + 1
 					})
 				}
 			})
